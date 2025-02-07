@@ -127,7 +127,7 @@ AppReactionOverlayManager().showReactionOverlay(
 
 For complete examples, check the `example` folder inside the repository
 
-<img src="assets/demo-app.gif" width="300">
+<img src="https://github.com/Ignaciomanchu1998/reaction_overlay/blob/main/assets/demo-app.gif" width="300">
 
 ## Additional information
 
