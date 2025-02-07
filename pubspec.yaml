@@ -1,7 +1,7 @@
 name: reaction_overlay
 description: "Reaction Overlay is a component that helps open a floating window above the list item. You can add IconButtons with different functions."
 version: 0.0.1
-homepage:
+homepage: https://github.com/Ignaciomanchu1998/reaction_overlay
 
 environment:
   sdk: ^3.6.1
