@@ -9,17 +9,17 @@ class AppReactionOverlayManager {
   /// Displays a reaction overlay at a specific position on the screen.
   void showReactionOverlay({
     required BuildContext context,
-    required Map<int, GlobalKey> itemKeys,
+    required Map<int, GlobalKey> itemKey,
     required int itemId,
     required List<IconButton> buttons,
     Curve? curve,
     EdgeInsets? padding,
     BorderRadius? borderRadius,
   }) {
-    if (!_isMessageValid(itemKeys, itemId)) return;
+    if (!_isMessageValid(itemKey, itemId)) return;
 
     _removeOverlay();
-    final position = _calculateOverlayPosition(itemKeys[itemId]!);
+    final position = _calculateOverlayPosition(itemKey[itemId]!);
     _overlayEntry = _createOverlayEntry(
       position: position,
       buttons: buttons,

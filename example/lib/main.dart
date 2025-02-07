@@ -35,7 +35,7 @@ class _Items extends StatelessWidget {
           title: Text('Item $index'),
           onTap: () => AppReactionOverlayManager().showReactionOverlay(
             context: context,
-            itemKeys: itemsKeys,
+            itemKey: itemsKeys,
             itemId: index,
             buttons: [
               IconButton(
