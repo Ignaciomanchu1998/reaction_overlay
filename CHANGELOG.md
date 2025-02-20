@@ -9,3 +9,5 @@ Production ready, but i want to add more options
 - A fixed size is set for the overlay, initially displaying 6 buttons by default.
 - If there are more than 6 buttons, an additional button is added to reveal the rest.
 
+## [0.0.3] - Overlay overflow fixes for minimal buttons.
+- If there are fewer than 6 buttons, the size adjusts automatically.

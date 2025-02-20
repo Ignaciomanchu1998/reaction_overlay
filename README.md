@@ -124,7 +124,6 @@ AppReactionOverlayManager().showReactionOverlay(
 ```
 
 ## Demo
-
 For complete examples, check the `example` folder inside the repository
 
 <img src="https://github.com/Ignaciomanchu1998/reaction_overlay/blob/main/assets/demo-app.gif" width="300">
@@ -134,3 +133,7 @@ For complete examples, check the `example` folder inside the repository
 Check the [**repository for more examples**](https://github.com/Ignaciomanchu1998/reaction_overlay), or the example folder inside the package.
 
 Don't forget to like the package if you find it useful, and if you have any suggestion, please let me know.
+
+## 📌 Autor
+[![GitHub](https://img.shields.io/badge/GitHub-Profile-black?logo=github)](https://github.com/Ignaciomanchu1998)
+

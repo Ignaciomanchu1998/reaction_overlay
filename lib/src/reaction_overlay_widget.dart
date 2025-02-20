@@ -33,6 +33,11 @@ class _ReactionOverlayWidgetState extends State<ReactionOverlayWidget> with Sing
   Offset _adjustedPosition = Offset.zero;
   bool _isAtEnd = false;
 
+  // Constantes para el cálculo de tamaños
+  static const double buttonWidth = 40.0;
+  static const double buttonSpacing = 4.0;
+  static const double moreButtonWidth = 45.0;
+
   @override
   void initState() {
     super.initState();
@@ -58,11 +63,18 @@ class _ReactionOverlayWidgetState extends State<ReactionOverlayWidget> with Sing
   void _onScroll() {
     if (_scrollController.hasClients) {
       setState(() {
-        bool isAtEnd = _scrollController.offset >= _scrollController.position.maxScrollExtent - 10;
-
+        bool isAtEnd = _scrollController.offset >= _scrollController.position.maxScrollExtent - 15;
         _isAtEnd = isAtEnd;
       });
     }
+  }
+
+  double _calculateContainerWidth() {
+    final totalButtons = widget.buttons.length;
+    final showMoreButton = totalButtons > widget.maxVisibleButtons;
+    final visibleButtons = showMoreButton ? widget.maxVisibleButtons : totalButtons;
+
+    return (buttonWidth * visibleButtons) + (buttonSpacing * (visibleButtons - 1)) + (showMoreButton ? buttonSpacing + moreButtonWidth : 0);
   }
 
   void _calculatePosition() {
@@ -70,11 +82,9 @@ class _ReactionOverlayWidgetState extends State<ReactionOverlayWidget> with Sing
     double dx = widget.position.dx;
     double dy = widget.position.dy;
 
-    final buttonWidth = 40.0;
-    final spacing = 4.0;
-    final visibleButtonsCount = widget.maxVisibleButtons;
+    final containerWidth = _calculateContainerWidth();
     final totalPadding = widget.padding.left + widget.padding.right;
-    final overlayWidth = (visibleButtonsCount * buttonWidth) + ((visibleButtonsCount - 1) * spacing) + totalPadding + 45; // +45 for more button
+    final overlayWidth = containerWidth + totalPadding;
 
     if (dx + overlayWidth > screenSize.width) {
       dx = screenSize.width - overlayWidth - 8;
@@ -96,15 +106,13 @@ class _ReactionOverlayWidgetState extends State<ReactionOverlayWidget> with Sing
   void _handleMoreButtonTap() {
     if (_scrollController.hasClients) {
       if (_isAtEnd) {
-        // Si estamos al final, volvemos al inicio
         _scrollController.animateTo(
           0,
           duration: const Duration(milliseconds: 300),
           curve: Curves.easeInOut,
         );
       } else {
-        // Calculamos la siguiente posición de scroll
-        final nextPosition = _scrollController.offset + (40.0 * 3); // Avanzamos 3 botones
+        final nextPosition = _scrollController.offset + (buttonWidth * 3 + buttonSpacing * 2);
         _scrollController.animateTo(
           nextPosition.clamp(0, _scrollController.position.maxScrollExtent),
           duration: const Duration(milliseconds: 300),
@@ -157,6 +165,9 @@ class _ReactionOverlayWidgetState extends State<ReactionOverlayWidget> with Sing
   }
 
   Widget _buildButtonContainer() {
+    final showMoreButton = widget.buttons.length > widget.maxVisibleButtons;
+    final containerWidth = _calculateContainerWidth();
+
     return Container(
       padding: widget.padding,
       decoration: BoxDecoration(
@@ -172,25 +183,27 @@ class _ReactionOverlayWidgetState extends State<ReactionOverlayWidget> with Sing
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           SizedBox(
-            width: widget.maxVisibleButtons * 44.0, // 40 + 4 spacing
+            width: containerWidth - (showMoreButton ? moreButtonWidth + buttonSpacing : 0),
             child: SingleChildScrollView(
               controller: _scrollController,
               scrollDirection: Axis.horizontal,
-              physics: const NeverScrollableScrollPhysics(), // Deshabilitamos el scroll manual
+              physics: const NeverScrollableScrollPhysics(),
               child: Row(
+                mainAxisSize: MainAxisSize.min,
                 children: List.generate(widget.buttons.length, (index) {
                   return Padding(
-                    padding: EdgeInsets.only(right: index < widget.buttons.length - 1 ? 4 : 0),
+                    padding: EdgeInsets.only(right: index < widget.buttons.length - 1 ? buttonSpacing : 0),
                     child: _buildReactionButton(widget.buttons[index]),
                   );
                 }),
               ),
             ),
           ),
-          if (widget.buttons.length > widget.maxVisibleButtons) ...[
-            const SizedBox(width: 4),
+          if (showMoreButton) ...[
+            SizedBox(width: buttonSpacing),
             _buildMoreButton(),
           ],
         ],
@@ -200,7 +213,7 @@ class _ReactionOverlayWidgetState extends State<ReactionOverlayWidget> with Sing
 
   Widget _buildReactionButton(IconButton button) {
     return SizedBox(
-      width: 40,
+      width: buttonWidth,
       height: 45,
       child: Material(
         color: Colors.transparent,
@@ -223,7 +236,7 @@ class _ReactionOverlayWidgetState extends State<ReactionOverlayWidget> with Sing
 
   Widget _buildMoreButton() {
     return SizedBox(
-      width: 45,
+      width: moreButtonWidth,
       height: 45,
       child: Material(
         color: Colors.transparent,
