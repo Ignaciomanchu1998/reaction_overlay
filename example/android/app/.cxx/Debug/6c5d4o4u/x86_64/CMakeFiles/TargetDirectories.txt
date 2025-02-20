@@ -1,0 +1,2 @@
+/Users/ignaciomanchu/Projects/PersonalTeam/reaction_overlay/example/android/app/.cxx/Debug/6c5d4o4u/x86_64/CMakeFiles/edit_cache.dir
+/Users/ignaciomanchu/Projects/PersonalTeam/reaction_overlay/example/android/app/.cxx/Debug/6c5d4o4u/x86_64/CMakeFiles/rebuild_cache.dir
