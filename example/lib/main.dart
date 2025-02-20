@@ -79,36 +79,29 @@ class _Items extends StatelessWidget {
                 },
               ),
               IconButton(
-                icon: const Text("👎", style: TextStyle(fontSize: 24)),
+                icon: const Text("🤬", style: TextStyle(fontSize: 24)),
                 onPressed: () {
                   ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text('You disliked this item.')),
+                    const SnackBar(content: Text('You were angry.')),
                   );
                 },
               ),
               IconButton(
-                icon: const Text("😡", style: TextStyle(fontSize: 24)),
+                icon: const Text("🤮", style: TextStyle(fontSize: 24)),
                 onPressed: () {
                   ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text('You hated this item.')),
+                    const SnackBar(content: Text('You were sick.')),
                   );
                 },
               ),
               IconButton(
-                icon: const Text("😡", style: TextStyle(fontSize: 24)),
+                icon: const Text("🤯", style: TextStyle(fontSize: 24)),
                 onPressed: () {
                   ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text('You hated this item.')),
+                    const SnackBar(content: Text('You were amazed.')),
                   );
                 },
               ),
-              IconButton(
-                icon: const Text("😡", style: TextStyle(fontSize: 24)),
-                onPressed: () {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text('You hated this item.')),
-                  );
-              })
             ],
           ),
         );
